@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<body style="text-align:center; font-family:sans-serif; background-image:url('images/background.png'); background-size:cover;">
+
+	<img src="images/sustainablefertilizer.png" style="display:block;margin:50px auto 25px auto;" width="570" height="354">
+
+	<br><br>
+
+	<table border="1" style="margin:auto; width:900px; border-collapse:collapse;">
+		<tr>
+			<td width="300" height="300" style="text-align:center; background-color:#ffffff; vertical-align:middle;">
+				<img id="plant-photo" src="" style="width:100%; aspect-ratio:1/1; object-fit:cover; display:none;">
+				<div id="photo-text">Photo will appear here</div>
+			</td>
+
+			<td id="result" width="300" align="left" style="padding:20px; background-color:#ffffff; vertical-align:top;">
+				<strong>Recommendation:</strong><br>
+				Please select your options on the right.
+			</td>
+
+			<td width="300" style="padding:20px; background-color:#f9f9f9; vertical-align:top;">
+				<label>Choose Plant:</label><br>
+				<select id="plant" style="width:100%;">
+					<option value="tomato">Tomato</option>
+					<option value="eggplant">Eggplant</option>
+					<option value="chili">Chili</option>
+					<option value="okra">Okra</option>
+					<option value="calamansi">Calamansi</option>
+				</select>
+                
+				<br><br>
+
+				<label>Choose Stage:</label><br>
+				<select id="stage" style="width:100%;">
+					<option value="growth">Growth</option>
+					<option value="germination">Germination</option>
+					<option value="flowering">Flowering</option>
+					<option value="fruiting">Fruiting</option>
+				</select>
+
+				<br><br>
+
+				<button onclick="getRecommendation()" style="width:100%; padding:15px; font-weight: bold;">
+					Get Recommendation
+				</button>
+			</td>
+		</tr>
+	</table>
+
+	<script>
+		function getRecommendation() {
+			var plant=document.getElementById("plant").value;
+			var stage=document.getElementById("stage").value;
+            
+			var resultArea=document.getElementById("result");
+			var imgElement=document.getElementById("plant-photo");
+			var textElement=document.getElementById("photo-text");
+
+			var info = "";
+			if (stage === "germination" || stage === "growth") {
+				info="<strong>Use FAA (Fish Amino Acid)</strong><br>" +
+					"Ratio: 5mL per 1L water<br>" +
+					"Frequency: Once a week<br>" +
+					"Application: Soil or foliar spray";
+			} 
+			else {
+				info="<strong>Use FFJ (Fermented Fruit Juice)</strong><br>" +
+					"Ratio: 15mL per 1L water<br>" +
+					"Frequency: Once a week<br>" +
+					"Application: Foliar spray";
+			}
+
+			var plantDisplay=plant.charAt(0).toUpperCase()+plant.slice(1);
+			resultArea.innerHTML="<strong>Plant:"+plantDisplay+"</strong><br><br>"+info;
+
+			imgElement.src="images/"+plant+".png"; 
+			imgElement.style.display="block"; 
+			textElement.style.display="none"; 
+		}
+	</script>
+
+</body>
+</html>
